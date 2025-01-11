@@ -16,7 +16,7 @@ public class CommandFastMove implements Command{
         if(arguments.length == 0) {
             throw new PuzzleRoomInvalidArgumentsException();
         }
-        for (int i = 0; i < arguments.length ; i++) {
+        for (int i = arguments.length - 1; i >= 0 ; i--) {
 
             char tmp = arguments[i].charAt(0);
             commands.add(tmp);
@@ -42,16 +42,15 @@ public class CommandFastMove implements Command{
                 default -> throw new PuzzleRoomInvalidArgumentsException();
             };
 
-            if (success) {
-                // If the move was successful, automatically execute a show command
-                // to show the player the new state
-                CommandShow showCommand = new CommandShow();
-                showCommand.execute(gameBoard);
-            } else {
+            if (!success) {
                 // If the move was not successful - e.g. because the player moved
                 // into a wall, or already finished the maze, then throw an Exception
+                CommandShow showCommand = new CommandShow();
+                showCommand.execute(gameBoard);
                 throw new PuzzleRoomInvalidMoveException();
             }
         }
+        CommandShow showCommand = new CommandShow();
+        showCommand.execute(gameBoard);
     }
 }
