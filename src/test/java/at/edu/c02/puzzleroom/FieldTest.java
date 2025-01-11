@@ -75,4 +75,59 @@ public class FieldTest {
         // Game should be finished after moving right twice
         assertTrue(gameBoard.isFinished());
     }
+
+
+    @Test
+    public void oneWayFieldPositive() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+        // Finish is reached when moving twice to the right
+        new CommandLoad(new String[]{"src/test/resources/oneway.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+        // Player should start at 0 steps
+        assertEquals(0, player.getStepCount());
+
+        // Moving right should be possible, since there is a oneway field
+        boolean success = player.moveRight();
+        assertTrue(success);
+
+        // Player should now be at 1 step
+        assertEquals(1, player.getStepCount());
+
+        success = player.moveUp();
+        assertTrue(success);
+
+        // Player should now be at 2 step
+        assertEquals(2, player.getStepCount());
+    }
+
+    @Test
+    public void oneWayFieldNegative() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+        // Finish is reached when moving twice to the right
+        new CommandLoad(new String[]{"src/test/resources/oneway.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+        // Player should start at 0 steps
+        assertEquals(0, player.getStepCount());
+
+        // Moving right should be possible, since there is a oneway field
+        boolean success = player.moveRight();
+        assertTrue(success);
+
+        // Player should now be at 1 step
+        assertEquals(1, player.getStepCount());
+
+        success = player.moveDown();
+        assertFalse(success);
+
+        success = player.moveLeft();
+        assertFalse(success);
+
+        success = player.moveRight();
+        assertFalse(success);
+
+        // Player should now be at 1 step
+        assertEquals(1, player.getStepCount());
+    }
 }
