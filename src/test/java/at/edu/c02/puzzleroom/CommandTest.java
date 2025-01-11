@@ -48,6 +48,7 @@ public class CommandTest {
         new CommandLoad(new String[]{"src/test/resources/fastmove.maze"}).execute(gameBoard);
         Player player = gameBoard.getPlayer();
 
+
         new CommandFastMove(new String[]{"d", "r", "r", "u"}).execute(gameBoard);
 
         assertEquals(4, player.getStepCount());
