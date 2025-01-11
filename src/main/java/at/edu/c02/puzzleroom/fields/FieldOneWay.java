@@ -4,7 +4,7 @@ import at.edu.c02.puzzleroom.Direction;
 import at.edu.c02.puzzleroom.GameBoard;
 
 /**
- * A wall field. The player can never move onto this field.
+ * A oneway field. The player can move onto this field, but only in one direction from it.
  */
 public class FieldOneWay extends BaseField {
 
