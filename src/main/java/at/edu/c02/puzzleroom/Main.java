@@ -2,7 +2,6 @@ package at.edu.c02.puzzleroom;
 import java.io.IOException;
 
 
-
 public class Main {
     /**
      * This is the main program entry point.
